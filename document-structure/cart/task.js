@@ -45,5 +45,5 @@ function  addToCard(event) {
     <div class="cart__product-count">${count}</div>
     </div>`;
 
-    cartProduct.insertAdjacentHTML('beforeend', productToCart);
+    cartProduct.insertAdjacentHTML('beforeEnd', productToCart);
 }
