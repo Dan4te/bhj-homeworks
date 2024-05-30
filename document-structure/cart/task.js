@@ -2,7 +2,6 @@ const cartProducts = document.querySelector('.cart__products');
 const productControl = document.querySelectorAll('.product__quantity-control');
 const productAdd = document.querySelectorAll('.product__add');
 
-
 productControl.forEach(element => {
     element.addEventListener('click', (event) => {
         let value = event.target.parentNode.querySelector('.product__quantity-value') 
@@ -23,19 +22,6 @@ productAdd.forEach(element => {
         const countFromProduct = +event.target.parentNode.querySelector('.product__quantity-value').innerText;
         const productImg = product.querySelector('.product__image').src;
         const count = product.querySelector('.product__quantity-value').innerText;
-
-        // const productInCard = cards.find(item => item.dataset.id === id);
-        // if (productInCard) {
-        //     let productCount = document.querySelector('.cart__product-count');
-        //     let total = +productCount.innerText;
-        //     productCount.innerText = total + countFromProduct;
-        //     return false;
-        // } else {
-        //     cartProducts.insertAdjacentHTML('beforeEnd', `<div class="cart__product" data-id="${id}">
-        //     <img class="cart__product-image" src="${productImg}">
-        //     <div class="cart__product-count">${count}</div>
-        //     </div>`);
-        // }
 
         for (let item of cartProducts.children) {
             if (item.dataset.id === id) {
