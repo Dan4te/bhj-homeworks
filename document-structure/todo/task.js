@@ -4,10 +4,9 @@ const taskList = document.getElementById('tasks__list');
 let removeButton;
 let tasks;
 
-function taskAdd() { 
-    if (taskInput.value) {
+function taskAdd(event) { 
+    if (taskInput.value.trim()) {
         event.preventDefault();
-        
         taskList.insertAdjacentHTML('beforeEnd', `
             <div class="task">
             <div class="task__title">
@@ -16,24 +15,22 @@ function taskAdd() {
             <a href="#" class="task__remove">&times;</a>
             </div>`);
 
-        taskInput.value = '';
+        taskInput.value = "";
+
         removeButton = document.getElementsByClassName('task__remove');
         tasks = document.getElementsByClassName('task');
+    } else {
+        event.preventDefault();
+        taskInput.value = "";
     }
 }
 
 taskButton.addEventListener('click', taskAdd);
 
-taskInput.addEventListener('keydown', (event) => {
-    if (event.key === 13) {
-        taskAdd();
-    }
-})
-
 taskList.onclick = function(event) {
     let target = event.target;
+    
     if (target.classList.contains('task__remove')) {
         target.closest('.task').remove();
     }
-}
-
+} 

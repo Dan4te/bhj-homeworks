@@ -19,11 +19,9 @@ tooltips.forEach(tooltip => {
 
         if (findElem === undefined) {
             elem.classList.add('tooltip_active');
-        } else {
-             if (findElem !== elem) {
+        } else if (findElem !== elem) {
             elem.classList.add('tooltip_active');
         }
             findElem.classList.remove('tooltip_active');
-        }
     })
 })
