@@ -22,19 +22,20 @@ productAdd.forEach(element => {
         const countFromProduct = +event.target.parentNode.querySelector('.product__quantity-value').innerText;
         const productImg = product.querySelector('.product__image').src;
         const count = product.querySelector('.product__quantity-value').innerText;
+        let cards = Array.from(cartProducts.children);
 
-        for (let item of cartProducts.children) {
-            if (item.dataset.id === id) {
-                let productCount = item.querySelector('.cart__product-count');
-                let total = +productCount.innerText;
-                productCount.innerText = total + countFromProduct;
-                return false;
-            }
+        let productInCard = cards.find(item => item.dataset.id === id);
+        if (productInCard) {
+            let productCount = productInCard.querySelector('.cart__product-count');
+            let total = +productCount.innerText;
+            productCount.innerText = total + countFromProduct;
+        } else {
+            cartProducts.insertAdjacentHTML('beforeEnd', `<div class="cart__product"
+            data-id="${id}">
+            <img class="cart__product-image" src="${productImg}">
+            <div class="cart__product-count">${count}</div>
+            </div>`);
         }
-        
-        cartProducts.insertAdjacentHTML('beforeEnd', `<div class="cart__product" data-id="${id}">
-        <img class="cart__product-image" src="${productImg}">
-        <div class="cart__product-count">${count}</div>
-        </div>`);
+
     })
 })
