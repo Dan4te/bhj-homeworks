@@ -1,21 +1,33 @@
-const progress = document.getElementById("progress");
-const form = document.querySelector('form');
+class ProgressBar{
+	constructor(container){
+		this.container = document.querySelector(container);
+		this.progress = this.container.querySelector('progress');
+		this.form = this.container.querySelector('form');
+	}
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    sendForm(formData);
-});
+	getFormData(){
+		this.form.addEventListener('submit', (e)=>{
+			e.preventDefault();
+			const data = new FormData(this.form);
+			this.sendForm(data);
+		});
+	}
 
-function sendForm(formData) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/upload');
-    xhr.send(formData);
+	sendForm(data){
+		
+		const xhr = new XMLHttpRequest();
+		
+		xhr.upload.addEventListener('progress', (e)=>{
+				this.changeProgress(e)
+		});
 
-    xhr.upload.addEventListener('progress', (e) => {
-        progress.value = e.loaded / e.total;
-        alert( 'Загружено на сервер');
-        console.log(e);
-    })
+		xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/upload')
 
-}  
+		xhr.send(data);
+	}
+
+	changeProgress(e) {
+		this.progress.value = e.loaded / e.total
+	}
+}
+new ProgressBar('.card').getFormData();
