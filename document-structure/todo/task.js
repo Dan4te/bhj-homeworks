@@ -6,7 +6,6 @@ let tasks;
 
 function taskAdd(event) { 
     if (taskInput.value.trim()) {
-        event.preventDefault();
         taskList.insertAdjacentHTML('beforeEnd', `
             <div class="task">
             <div class="task__title">
@@ -15,14 +14,12 @@ function taskAdd(event) {
             <a href="#" class="task__remove">&times;</a>
             </div>`);
 
-        taskInput.value = "";
-
         removeButton = document.getElementsByClassName('task__remove');
         tasks = document.getElementsByClassName('task');
-    } else {
-        event.preventDefault();
-        taskInput.value = "";
+       
     }
+    event.preventDefault();
+    taskInput.value = "";
 }
 
 taskButton.addEventListener('click', taskAdd);
