@@ -11,5 +11,5 @@ window.addEventListener('load', () => {
 
 but.addEventListener('click', () => {
   editor.value = '';
-  localStorage.setItem('text', editor.value);
+  localStorage.removeItem('text');
 })
